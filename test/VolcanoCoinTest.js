@@ -49,7 +49,7 @@ describe("Test VolcanoCoin Contract", function () {
     expect(await volcanoCoin.increase1000()).to.not.be.reverted;  // Expect: Should NOT be reverted, Expect PASS
     expect(await volcanoCoin.connect(owner).increase1000()).to.not.be.reverted; // Expect: Should NOT be reverted, Expect PASS
     expect(await volcanoCoin.connect(otherAccount).increase1000()).to.be.revertedWith("Only owner can do this");  // Expect: Should be reverted, Expect PASS, Actually FAIL
-    //await volcanoCoin.connect(otherAccount).increase1000();
+    //await volcanoCoin.connect(otherAccount).increase1000(); // Expect: Should be reverted, Expect FAIL, Actually FAIL
 
   });
 });
