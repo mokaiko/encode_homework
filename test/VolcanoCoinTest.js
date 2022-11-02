@@ -44,9 +44,12 @@ describe("Test VolcanoCoin Contract", function () {
   it("Should only allow onwer to increase supply", async function () {
     const { volcanoCoin, owner, otherAccount } = await loadFixture(deployVolcanoCoinFixture);
     console.log("contract addr: %s, \r\nowner: %s, \r\nother: %s", volcanoCoin.address, owner.address, otherAccount.address);
+    console.log("contract owner:", await volcanoCoin.owner());
 
-    expect(volcanoCoin.increase1000()).to.be.reverted;
-    expect(volcanoCoin.connect(owner).increase1000()).to.be.reverted;
-    expect(volcanoCoin.connect(otherAccount).increase1000()).to.be.reverted;
+    // expect(await volcanoCoin.increase1000()).to.be.revertedWith("Only owner can do this");
+    // expect(await volcanoCoin.connect(owner).increase1000()).to.be.reverted;
+    expect(await volcanoCoin.connect(otherAccount).increase1000()).to.be.reverted;
+    //await volcanoCoin.connect(otherAccount).increase1000();
+
   });
 });
