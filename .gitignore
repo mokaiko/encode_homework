@@ -9,3 +9,7 @@ out/
 
 # Dotenv file
 .env
+.DS_Store
+src/Counter.sol
+scripts/Counter.s.sol
+test/Counter.t.sol
