@@ -40,15 +40,15 @@ describe("Test VolcanoCoin Contract", function () {
     expect(await volcanoCoin.getTotalSupply()).to.equals(13000);
   });
 
-  // Need to be corrected
   it("Should only allow onwer to increase supply", async function () {
     const { volcanoCoin, owner, otherAccount } = await loadFixture(deployVolcanoCoinFixture);
     console.log("contract addr: %s, \r\nowner: %s, \r\nother: %s", volcanoCoin.address, owner.address, otherAccount.address);
     console.log("contract owner:", await volcanoCoin.owner());
 
-    // expect(await volcanoCoin.increase1000()).to.be.revertedWith("Only owner can do this");
-    // expect(await volcanoCoin.connect(owner).increase1000()).to.be.reverted;
-    expect(await volcanoCoin.connect(otherAccount).increase1000()).to.be.reverted;
+    // There are still some bugs here
+    expect(await volcanoCoin.increase1000()).to.not.be.reverted;
+    expect(await volcanoCoin.connect(owner).increase1000()).to.not.be.reverted;
+    expect(await volcanoCoin.connect(otherAccount).increase1000()).to.be.revertedWith("Only owner can do this");
     //await volcanoCoin.connect(otherAccount).increase1000();
 
   });
