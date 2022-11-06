@@ -1,0 +1,12 @@
+{
+    "name": "Volcano NFT",
+    "description": "Encode homework 11",
+    "image": "https://ipfs.io/ipfs/QmcsNjXYfrcyPyQRWYiin9cTcXWL3tdMtbdTPKmwDmUBJj",
+    "attributes": [
+        {
+            "name": "Fuji",
+            "volvano_color": "Blue",
+            "sun_color": "Red"
+        }
+    ]
+}
