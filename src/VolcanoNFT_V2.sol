@@ -6,6 +6,11 @@ import "openzeppelin-contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "openzeppelin-contracts/utils/Counters.sol";
 import "src/VolcanoCoin.sol";
 
+/// @title Mint NFT with token URL
+/// @author Mo Kaiko
+/// @notice Use ETH or ERC20 tokens to pay for minting NFT
+/// @dev Metadata stored in infura and picture stored in IPFS
+
 contract VolcanoNFT_V2 is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;

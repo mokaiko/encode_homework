@@ -1,0 +1,35 @@
+{
+  "transactions": [
+    {
+      "hash": "0x93ed004b088fd03ca4f06b960319c1b96799ecc26ab8f4c921cd4cbdb4dff3f1",
+      "transactionType": "CALL",
+      "contractName": null,
+      "contractAddress": "0x62B3827733Fe4613E9Ca4cDD589CCAb19A741a38",
+      "function": null,
+      "arguments": null,
+      "rpc": "https://eth-goerli.alchemyapi.io/v2/8dkNHZFphE6CX_nWMHIU7C2WO0Ll89rh",
+      "transaction": {
+        "type": "0x02",
+        "from": "0xe6ac36dcb627663d61538cbfd74438382ad18df1",
+        "to": "0x62b3827733fe4613e9ca4cdd589ccab19a741a38",
+        "gas": "0x110536",
+        "value": "0x0",
+        "data": "0xde9d132f",
+        "nonce": "0xbe",
+        "accessList": []
+      },
+      "additionalContracts": []
+    }
+  ],
+  "receipts": [],
+  "libraries": [],
+  "pending": [
+    "0x93ed004b088fd03ca4f06b960319c1b96799ecc26ab8f4c921cd4cbdb4dff3f1"
+  ],
+  "path": "/Users/menghaigang/vscode-workspace/study/Volcano_NFT_Foundry/broadcast/MyEpicNFT.s.sol/5/run-latest.json",
+  "returns": {},
+  "timestamp": 1668789082,
+  "chain": 5,
+  "multi": false,
+  "commit": "20dc0ce"
+}

@@ -14,3 +14,5 @@ broadcast/
 src/Counter.sol
 scripts/Counter.s.sol
 test/Counter.t.sol
+src/MyEpicNFT.sol
+scripts/MyEpicNFT.s.sol
