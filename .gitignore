@@ -12,7 +12,7 @@ broadcast/
 .env
 .DS_Store
 src/Counter.sol
-scripts/Counter.s.sol
+script/Counter.s.sol
 test/Counter.t.sol
 src/MyEpicNFT.sol
-scripts/MyEpicNFT.s.sol
+script/MyEpicNFT.s.sol
