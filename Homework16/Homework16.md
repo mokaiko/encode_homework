@@ -1,6 +1,6 @@
 # [Foundry]
 
-    ## Mint NFT, store the NFT Metadata on chain
+## Mint NFT, store the NFT Metadata on chain
 
     code: https://github.com/mokaiko/encode_homework/tree/volcanonft_foundry
 
@@ -8,9 +8,9 @@
 
     opensea: https://testnets.opensea.io/collection/volcanonft-tzeg1cxbqv
 
-    ![image](hw16.png)
+![image](hw16.png)
 
-    ## Mint NFT, store the NFT Metadata on IPFS
+## Mint NFT, store the NFT Metadata on IPFS
 
     code: https://github.com/mokaiko/encode_homework/tree/volcanonft_foundry
 
@@ -18,4 +18,4 @@
 
     opensea: https://testnets.opensea.io/collection/volcanonft-drzdmpgp8i
 
-    ![image](hw16_2.png)
+![image](hw16_2.png)
