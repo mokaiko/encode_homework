@@ -57,10 +57,6 @@ async function SwapDaiForUsdc() {
     amountOut.wait();
     console.log("amountOut hash:", amountOut.hash);
 
-    let daiBalance = await dai.balanceOf("0x34F3E4C1a8E93573433C1C23Aa159d0a3a383612");
-    console.log("My DAI balance:", ethers.utils.formatEther(daiBalance));
-    daiBalance = await dai.balanceOf(binanceAccount);
-    console.log("BA DAI balance:", ethers.utils.formatEther(daiBalance));
 }
 
 async function main() {
