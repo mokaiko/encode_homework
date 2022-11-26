@@ -1,6 +1,4 @@
-# [Foundry]
-
-## Interact With Uniswap 
+# Interact With Uniswap 
 
     Impersonate an account such as the Binance account that has a lot of DAI.
 
@@ -8,7 +6,10 @@
     1. Swap DAI for USDC
     2. Swap DAI for BUSD
 
+## [Foundry]
+
     code: https://github.com/mokaiko/encode_homework/tree/forkmainnet_foundry
 
-# [Hardhat]
+## [Hardhat]
 
+    code: https://github.com/mokaiko/encode_homework/blob/forkmainnet_hardhat_ts/scripts/InteractWithUniswap.ts
