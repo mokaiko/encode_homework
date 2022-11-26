@@ -10,16 +10,20 @@ const uniswapV3RouterAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
 
 const poolFee_005percent = 500;
 const poolFee_030percent = 3000;
-const amountIn_DAI = ethers.utils.parseEther("100");
-const amountOutMinimum_USDC = ethers.BigNumber.from("90000000");
-const amountOutMinimum_BUSD = ethers.utils.parseEther("90");
 
-const dai = new ethers.Contract(DAI, IERC20, ethers.providers.getDefaultProvider());
-const usdc = new ethers.Contract(USDC, IERC20, ethers.providers.getDefaultProvider());
-const busd = new ethers.Contract(BUSD, IERC20, ethers.providers.getDefaultProvider());
-const uniswapRouter = new ethers.Contract(uniswapV3RouterAddress, SwapRouterABI, ethers.providers.getDefaultProvider());
+const amountIn_DAI = ethers.utils.parseEther("100");
+// const amountOutMinimum_USDC = ethers.BigNumber.from("90000000");
+// const amountOutMinimum_BUSD = ethers.utils.parseEther("90");
+
+const provider = ethers.provider;
+
+const dai = new ethers.Contract(DAI, IERC20, provider);
+const usdc = new ethers.Contract(USDC, IERC20, provider);
+const busd = new ethers.Contract(BUSD, IERC20, provider);
+const uniswapRouter = new ethers.Contract(uniswapV3RouterAddress, SwapRouterABI, provider);
 
 async function getBalance() {
+    console.log("--------print balance---------");
 
     const daiBalance = await dai.balanceOf(binanceAccount);
     const usdcBalance = await usdc.balanceOf(binanceAccount);
@@ -31,10 +35,12 @@ async function getBalance() {
 }
 
 async function SwapDaiForUsdc() {
+    console.log("------swap DAI to USDC--------");
+
     const binanceSigner = await ethers.getImpersonatedSigner(binanceAccount);
 
     const txApprove = await dai.connect(binanceSigner).approve(uniswapV3RouterAddress, amountIn_DAI);
-    txApprove.wait();
+    await txApprove.wait();
     console.log("txApprove hash:", txApprove.hash);
     const allowance = await dai.connect(binanceSigner).allowance(binanceAccount, uniswapV3RouterAddress);
     console.log("allowance:", allowance.toString());
@@ -42,19 +48,42 @@ async function SwapDaiForUsdc() {
         tokenIn: DAI,
         tokenOut: USDC,
         fee: poolFee_030percent,
-        recipient: "0x34F3E4C1a8E93573433C1C23Aa159d0a3a383612",
+        recipient: binanceAccount,
         deadline: Math.floor(Date.now() / 1000) + 600, // 600s, 10min
         amountIn: amountIn_DAI,
         amountOutMinimum: 0,
         sqrtPriceLimitX96: 0,
     };
-    // console.log("amountIn_DAI:", amountIn_DAI.toString());
-    // let daiBalance = await dai.balanceOf(binanceAccount);
-    // console.log("- DAI balance:", ethers.utils.formatEther(daiBalance));
-    //console.log(params);
 
     const amountOut = await uniswapRouter.connect(binanceSigner).exactInputSingle(params);
-    amountOut.wait();
+    await amountOut.wait();
+    console.log("amountOut hash:", amountOut.hash);
+
+}
+
+
+async function SwapDaiForBusd() {
+    console.log("------swap DAI to BUSD--------");
+    const binanceSigner = await ethers.getImpersonatedSigner(binanceAccount);
+
+    const txApprove = await dai.connect(binanceSigner).approve(uniswapV3RouterAddress, amountIn_DAI);
+    await txApprove.wait();
+    console.log("txApprove hash:", txApprove.hash);
+    const allowance = await dai.connect(binanceSigner).allowance(binanceAccount, uniswapV3RouterAddress);
+    console.log("allowance:", allowance.toString());
+    const params = {
+        tokenIn: DAI,
+        tokenOut: BUSD,
+        fee: poolFee_005percent,
+        recipient: binanceAccount,
+        deadline: Math.floor(Date.now() / 1000) + 600, // 600s, 10min
+        amountIn: amountIn_DAI,
+        amountOutMinimum: 0,
+        sqrtPriceLimitX96: 0,
+    };
+
+    const amountOut = await uniswapRouter.connect(binanceSigner).exactInputSingle(params);
+    await amountOut.wait();
     console.log("amountOut hash:", amountOut.hash);
 
 }
@@ -62,6 +91,7 @@ async function SwapDaiForUsdc() {
 async function main() {
     await getBalance();
     await SwapDaiForUsdc();
+    await SwapDaiForBusd();
     await getBalance();
 }
 
