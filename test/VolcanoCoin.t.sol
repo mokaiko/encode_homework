@@ -30,4 +30,24 @@ contract VolcanoCoinTest is Test {
         vm.prank(address(0x1));
         volcanoCoin.increase1000();
     }
+
+    function testPause() public {
+        volcanoCoin.pause();
+        vm.expectRevert();
+        volcanoCoin.increase1000();
+
+        volcanoCoin.unpause();
+        volcanoCoin.increase1000();
+
+        vm.prank(address(0x1));
+        vm.expectRevert();
+        volcanoCoin.pause();
+    }
+
+    function testInteractWithStringUtilsLibrary() public {
+        (string memory str, uint256 len) = volcanoCoin
+            .interactWithStringUtilsLibrary("I am Mo Kaiko ");
+        assertEq(str, "I am Mo Kaiko from ETH Denver");
+        assertEq(len, 29);
+    }
 }

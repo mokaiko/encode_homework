@@ -3,8 +3,12 @@
 pragma solidity ^0.8.0;
 
 import "openzeppelin-contracts/access/Ownable.sol";
+import "openzeppelin-contracts/security/Pausable.sol";
+import "./strings.sol";
 
-contract VolcanoCoin is Ownable {
+contract VolcanoCoin is Ownable, Pausable {
+    using strings for *;
+
     uint256 private totalSupply = 10_000;
 
     mapping(address => uint256) public balances;
@@ -27,12 +31,15 @@ contract VolcanoCoin is Ownable {
         return totalSupply;
     }
 
-    function increase1000() public onlyOwner {
+    function increase1000() public onlyOwner whenNotPaused {
         totalSupply = totalSupply + 1000;
         emit increaseTotalSupplyEvent(totalSupply);
     }
 
-    function transfer(uint256 _amount, address _recipient) public {
+    function transfer(uint256 _amount, address _recipient)
+        public
+        whenNotPaused
+    {
         require(
             balances[msg.sender] >= _amount,
             "Hey! The value you send should be less than your current balance!"
@@ -63,5 +70,25 @@ contract VolcanoCoin is Ownable {
 
     function getMyRecords() public view returns (Payment[] memory) {
         return records[msg.sender];
+    }
+
+    function pause() public onlyOwner {
+        _pause();
+    }
+
+    function unpause() public onlyOwner {
+        _unpause();
+    }
+
+    function interactWithStringUtilsLibrary(string memory _str)
+        public
+        pure
+        returns (string memory, uint256)
+    {
+        string memory resStr = strings.concat(
+            _str.toSlice(),
+            "from ETH Denver".toSlice()
+        );
+        return (resStr, strings.len(resStr.toSlice()));
     }
 }
